@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title">Ассистент супервизора</string>
+    <string name="new_order_title">Заказы</string>
+    <string name="tradeOutletButtonText">Торговая точка</string>
+    <string name="orderOKButtonText">Готово</string>
+    <string name="newOrderText">Новый заказ</string>
+    <string name="orderCancelButtonText">Отмена</string>
+    <string name="menuItem_ProductMatrix">Товарная матрица</string>
+    <string name="menuItem_Home">Главное</string>
+    <string name="meniItem_TradeOutlets">Торговые точки</string>
+    <string name="menuItem_NewOrder">Новый заказ</string>
+    <string name="menuItem_OrdersList">Заказы</string>
+    <string name="orderTitleTextView">Заказ</string>
+    <string name="orderDateTextView">от</string>
+    <string name="tradeOluletTitleText">Торговая точка №</string>
+    <string name="tradeOutletAlertHeader">Удаление торговой точки</string>
+    <string name="tradeOutletAlertMessage">Вы действительно хотите удалить торговую точку?</string>
+    <string name="emptyTradeOutletTitle">Имя</string>
+    <string name="emptyTradeOutletAddress">Адрес</string>
+    <string name="OrderTitleTextViewText">Имя</string>
+    <string name="productUnitOfMeasurementTitleText">Ед. изм.</string>
+    <string name="productMinQuantityTitleText">Мин. кол.</string>
+    <string name="productArticleTitleText">Артикул</string>
+    <string name="productDeleteAlertHeader">Удаление номенклатуры</string>
+    <string name="productDeleteAlertText">Вы действительно хотите удалить номенклатуру?</string>
+    <string name="orderDeleteAlertHeader">Удаление заказа</string>
+    <string name="orderDeleteAlertText">Удалить заказ?</string>
+    <string name="productsListHeader">Номенклатура</string>
+    <string name="orderFragmentHeader">Заказ</string>
+    <string name="ordersListHeader">Заказы</string>
+    <string name="tradeOutletsHeader">Торговые точки</string>
+    <string name="homeFragmentHeader">Главное окно</string>
+    <string name="mainIndicators">Основные показатели</string>
+</resources>

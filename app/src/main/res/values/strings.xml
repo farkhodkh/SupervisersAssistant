@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_title">Supervisers Assistant</string>
+    <string name="new_order_title">Orders</string>
+    <string name="newOrderText">New Order</string>
+    <string name="tradeOutletButtonText">Trade Outlet</string>
+    <string name="orderOKButtonText">OK</string>
+    <string name="orderCancelButtonText">Cancel</string>
+    <string name="menuItem_Home">Home</string>
+    <string name="meniItem_TradeOutlets">Trade outlets</string>
+    <string name="menuItem_ProductMatrix">Product Matrix</string>
+    <string name="menuItem_NewOrder">New order</string>
+    <string name="menuItem_OrdersList">Orders</string>
+    <string name="orderTitleTextView">Order</string>
+    <string name="orderDateTextView">date</string>
+    <string name="tradeOluletTitleText">Trade outlet #</string>
+    <string name="tradeOutletAlertHeader">Trade outlet will be deleted</string>
+    <string name="tradeOutletAlertMessage">Do you want to delete selected Trade outlet?</string>
+    <string name="emptyTradeOutletTitle">Title</string>
+    <string name="emptyTradeOutletAddress">Adress</string>
+    <string name="OrderTitleTextViewText">Title</string>
+    <string name="productUnitOfMeasurementTitleText">Meas.</string>
+    <string name="productMinQuantityTitleText">Min. qtty</string>
+    <string name="productArticleTitleText">Article</string>
+    <string name="productDeleteAlertHeader">Product delete</string>
+    <string name="productDeleteAlertText">Do you want to delete the Product?</string>
+    <string name="orderDeleteAlertHeader">Order delete</string>
+    <string name="orderDeleteAlertText">Delete order?</string>
+    <string name="productsListHeader">Product\'s list</string>
+    <string name="orderFragmentHeader">Order</string>
+    <string name="ordersListHeader">Orders</string>
+    <string name="tradeOutletsHeader">Trade outlets</string>
+    <string name="homeFragmentHeader">Main window</string>
+    <string name="mainIndicators">Main indicators</string>
+</resources>

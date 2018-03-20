@@ -1,6 +1,6 @@
 # SupervisersAssistant
 
-Date input
+Data input
 
 <img src="screenshots/intro1.gif" width="380" />
 

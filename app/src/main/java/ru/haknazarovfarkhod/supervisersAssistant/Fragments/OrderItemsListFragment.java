@@ -15,13 +15,13 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Orders;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperOrders;
 import ru.haknazarovfarkhod.supervisersAssistant.R;
 
 public class OrderItemsListFragment extends Fragment implements View.OnClickListener {
     //private OnFragmentInteractionListener mListener;
     private ArrayAdapter<String> listAdapter;
-    DatabaseHelper_Orders sqlHelper;
+    DatabaseHelperOrders sqlHelper;
     SQLiteDatabase db;
     Cursor productCursor;
     SimpleCursorAdapter productListAdapter;
@@ -42,7 +42,7 @@ public class OrderItemsListFragment extends Fragment implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sqlHelper = new DatabaseHelper_Orders(getContext());
+        sqlHelper = new DatabaseHelperOrders(getContext());
     }
 
     @Override
@@ -53,9 +53,9 @@ public class OrderItemsListFragment extends Fragment implements View.OnClickList
             db = sqlHelper.getReadableDatabase();
             sqlHelper.onCreate(db);
 
-            productCursor = db.rawQuery("select * from " + DatabaseHelper_Orders.TABLE_ORDERS_DETAILS + " where " + DatabaseHelper_Orders.TABLE_ORDERS_DETAILS_COLUMN_ORDER_NUMBER + " = 1", null);
+            productCursor = db.rawQuery("select * from " + DatabaseHelperOrders.TABLE_ORDERS_DETAILS + " where " + DatabaseHelperOrders.TABLE_ORDERS_DETAILS_COLUMN_ORDER_NUMBER + " = 1", null);
 
-            String[] headers = new String[]{DatabaseHelper_Orders.TABLE_ORDERS_DETAILS_COLUMN_LINE_NUMBER, DatabaseHelper_Orders.TABLE_ORDERS_DETAILS_COLUMN_PRODUCT_NUMBER};
+            String[] headers = new String[]{DatabaseHelperOrders.TABLE_ORDERS_DETAILS_COLUMN_LINE_NUMBER, DatabaseHelperOrders.TABLE_ORDERS_DETAILS_COLUMN_PRODUCT_NUMBER};
 
             productListAdapter = new SimpleCursorAdapter(getContext(), android.R.layout.two_line_list_item, productCursor, headers, new int[]{android.R.id.text1, android.R.id.text2}, 0);
 
@@ -71,7 +71,7 @@ public class OrderItemsListFragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_order_items_list, container, false);
-        sqlHelper = new DatabaseHelper_Orders(getContext());
+        sqlHelper = new DatabaseHelperOrders(getContext());
         productsList = view.findViewById(R.id.orderItemsScrollView);
         productsList.setPadding(10, 10, 10, 10);
         return view;

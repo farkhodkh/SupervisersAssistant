@@ -19,15 +19,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Orders;
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_TradeOutlets;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperOrders;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperTradeOutlets;
 import ru.haknazarovfarkhod.supervisersAssistant.DAO.daoHelperClasses.Order;
 import ru.haknazarovfarkhod.supervisersAssistant.R;
 
 public class OrdersListFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private ArrayAdapter<String> listAdapter;
-    DatabaseHelper_Orders sqlHelper;
+    DatabaseHelperOrders sqlHelper;
     SQLiteDatabase db;
     Cursor ordersCursor;
     SimpleCursorAdapter ordersListAdapter;
@@ -49,7 +49,7 @@ public class OrdersListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sqlHelper = new DatabaseHelper_Orders(getContext());
+        sqlHelper = new DatabaseHelperOrders(getContext());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class OrdersListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_orders_list, container, false);
 
-        sqlHelper = new DatabaseHelper_Orders(getContext());
+        sqlHelper = new DatabaseHelperOrders(getContext());
 
         ordersList = view.findViewById(R.id.ordersListView);
         ordersList.setPadding(10, 10, 10, 10);
@@ -135,10 +135,10 @@ public class OrdersListFragment extends Fragment {
             db = sqlHelper.getReadableDatabase();
             sqlHelper.onCreate(db);
 
-            ordersCursor = db.rawQuery("select TABLE_ORDERS._id, TABLE_ORDERS.orderDateString, TRADE_OUTLETS.name from " + DatabaseHelper_Orders.TABLE_ORDERS + " TABLE_ORDERS LEFT JOIN "
-                    + DatabaseHelper_TradeOutlets.TABLE_TRADE_OUTLETS + " TRADE_OUTLETS ON TABLE_ORDERS.outletId = TRADE_OUTLETS._id", null);
+            ordersCursor = db.rawQuery("select TABLE_ORDERS._id, TABLE_ORDERS.orderDateString, TRADE_OUTLETS.name from " + DatabaseHelperOrders.TABLE_ORDERS + " TABLE_ORDERS LEFT JOIN "
+                    + DatabaseHelperTradeOutlets.TABLE_TRADE_OUTLETS + " TRADE_OUTLETS ON TABLE_ORDERS.outletId = TRADE_OUTLETS._id", null);
 
-            String[] headers = new String[]{DatabaseHelper_Orders.TABLE_ORDERS_COLUMN_ORDER_NUMBER, DatabaseHelper_Orders.TABLE_ORDERS_COLUMN_ORDER_DATE_STRING, DatabaseHelper_TradeOutlets.TABLE_TRADE_OUTLETS_COLUMN_NAME};
+            String[] headers = new String[]{DatabaseHelperOrders.TABLE_ORDERS_COLUMN_ORDER_NUMBER, DatabaseHelperOrders.TABLE_ORDERS_COLUMN_ORDER_DATE_STRING, DatabaseHelperTradeOutlets.TABLE_TRADE_OUTLETS_COLUMN_NAME};
 
             ordersListAdapter = new SimpleCursorAdapter(getContext(), R.layout.order_line_item, ordersCursor, headers, new int[]{R.id.orderNumberTextView, R.id.orderDateTextView, R.id.tradeOutletInformationTextView}, 0);
 

@@ -2,12 +2,10 @@ package ru.haknazarovfarkhod.supervisersAssistant.Fragments.Presenters;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.HashMap;
+import java.util.Map;
 
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Main;
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Orders;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperMain;
 import ru.haknazarovfarkhod.supervisersAssistant.Fragments.MainFragment;
-import ru.haknazarovfarkhod.supervisersAssistant.R;
 
 /**
  * Created by USER on 20.03.2018.
@@ -15,7 +13,7 @@ import ru.haknazarovfarkhod.supervisersAssistant.R;
 
 public class MainFragmentPresenter implements MainFragmentInt {
     private MainFragment mainFragment;
-    private DatabaseHelper_Main sqlHelper;
+    private DatabaseHelperMain sqlHelper;
     private SQLiteDatabase db;
 
     public MainFragmentPresenter(MainFragment mainFragment) {
@@ -24,10 +22,10 @@ public class MainFragmentPresenter implements MainFragmentInt {
 
     @Override
     public void refreshMainMenu() {
-        sqlHelper = new DatabaseHelper_Main(mainFragment.getContext());
+        sqlHelper = new DatabaseHelperMain(mainFragment.getContext());
 
         db = sqlHelper.getReadableDatabase();
-        HashMap totalParams = sqlHelper.getMainInformation(db);
+        Map totalParams = sqlHelper.getMainInformation(db);
         if (!totalParams.isEmpty()) {
             mainFragment.ordersQuantityTextView.setText((String) totalParams.get("ordersQuantity"));
             mainFragment.productMatrixQuantityTextView.setText((String) totalParams.get("productMatrixQuantity"));

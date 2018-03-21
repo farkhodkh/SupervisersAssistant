@@ -21,9 +21,9 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperOrders;
 import ru.haknazarovfarkhod.supervisersAssistant.R;
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Orders;
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Products;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperProducts;
 import ru.haknazarovfarkhod.supervisersAssistant.DAO.daoHelperClasses.Order;
 import ru.haknazarovfarkhod.supervisersAssistant.DAO.daoHelperClasses.OrderLine;
 
@@ -46,7 +46,7 @@ public class OrderFragment extends Fragment implements Serializable {
     private ArrayList<OrderLine> orderLines;
 
     Cursor ordersCursor;
-    DatabaseHelper_Orders sqlHelper;
+    DatabaseHelperOrders sqlHelper;
 
     SQLiteDatabase db;
 
@@ -109,7 +109,7 @@ public class OrderFragment extends Fragment implements Serializable {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sqlHelper = new DatabaseHelper_Orders(getContext());
+        sqlHelper = new DatabaseHelperOrders(getContext());
         db = sqlHelper.getWritableDatabase();
         sqlHelper.dbInitialization(db);
 
@@ -207,18 +207,17 @@ public class OrderFragment extends Fragment implements Serializable {
 
             String query ="SELECT orders_details._id _id,\n" +
                     "  (select count(*) from orders_details tbl  where orders_details.orderNumber = tbl.orderNumber and orders_details._id >= tbl._id) lineNumber,\n" +
-                    "  tblProducts.productName " + DatabaseHelper_Products.COLUMN_PRODUCTNAME + ",\n" +
-                    "  " + DatabaseHelper_Orders.TABLE_ORDERS_DETAILS_COLUMN_QUANTITY + ",\n" +
-                    "  tblProducts.unitOfMeasurement " + DatabaseHelper_Products.COLUMN_UNITOFMEASUREMENT +
+                    "  tblProducts.productName " + DatabaseHelperProducts.COLUMN_PRODUCTNAME + ",\n" +
+                    "  " + DatabaseHelperOrders.TABLE_ORDERS_DETAILS_COLUMN_QUANTITY + ",\n" +
+                    "  tblProducts.unitOfMeasurement " + DatabaseHelperProducts.COLUMN_UNITOFMEASUREMENT +
                     "  FROM orders_details orders_details\n" +
-                    "  LEFT JOIN " + DatabaseHelper_Products.TABLE_PRODUCTS + " tblProducts\n" +
+                    "  LEFT JOIN " + DatabaseHelperProducts.TABLE_PRODUCTS + " tblProducts\n" +
                     "  ON tblProducts._id = orders_details.productNumber\n" +
                     "  WHERE orders_details.orderNumber = " + order.getOrderId() +
                     "  ORDER BY orders_details._id;\n";
 
-            //ordersCursor = db.rawQuery("select * from " + DatabaseHelper_Orders.TABLE_ORDERS_DETAILS + " WHERE " + DatabaseHelper_Orders.TABLE_ORDERS_COLUMN_ORDER_NUMBER + "=" + order.getOrderId(), null);
             ordersCursor = db.rawQuery(query, null);
-            String[] headers = new String[]{DatabaseHelper_Orders.TABLE_ORDERS_DETAILS_COLUMN_LINE_NUMBER, "lineNumber", DatabaseHelper_Products.COLUMN_PRODUCTNAME, DatabaseHelper_Orders.TABLE_ORDERS_DETAILS_COLUMN_QUANTITY, DatabaseHelper_Products.COLUMN_UNITOFMEASUREMENT};
+            String[] headers = new String[]{DatabaseHelperOrders.TABLE_ORDERS_DETAILS_COLUMN_LINE_NUMBER, "lineNumber", DatabaseHelperProducts.COLUMN_PRODUCTNAME, DatabaseHelperOrders.TABLE_ORDERS_DETAILS_COLUMN_QUANTITY, DatabaseHelperProducts.COLUMN_UNITOFMEASUREMENT};
 
             ordersListAdapter = new SimpleCursorAdapter(getContext(), R.layout.order_details_product_line, ordersCursor, headers, new int[]{R.id.lineUniqNumber, R.id.lineNumberTextView, R.id.productNameTextView, R.id.quantityTextView, R.id.unitOfMeasurementTextView}, 0);
             productsList.setAdapter(ordersListAdapter);

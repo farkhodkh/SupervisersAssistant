@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 import java.util.HashMap;
 
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_TradeOutlets;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperTradeOutlets;
 import ru.haknazarovfarkhod.supervisersAssistant.R;
 
 public class TradeOutletFragment extends Fragment {
@@ -23,7 +23,7 @@ public class TradeOutletFragment extends Fragment {
     private EditText tradeOutletPhone;
     private long currentItemId;
 
-    DatabaseHelper_TradeOutlets sqlHelper;
+    DatabaseHelperTradeOutlets sqlHelper;
     SQLiteDatabase db;
 
     public TradeOutletFragment() {
@@ -43,7 +43,7 @@ public class TradeOutletFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         tradeOutletFragment = inflater.inflate(R.layout.fragment_trade_outlet, container, false);
-        sqlHelper = new DatabaseHelper_TradeOutlets(getContext());
+        sqlHelper = new DatabaseHelperTradeOutlets(getContext());
         tradeOutletNamePlainText = tradeOutletFragment.findViewById(R.id.tradeOutletNamePlainText);
         tradeOutletAddresPlainText = tradeOutletFragment.findViewById(R.id.tradeOutletAddresPlainText);
         tradeOutletPhone = tradeOutletFragment.findViewById(R.id.tradeOutletPhone);

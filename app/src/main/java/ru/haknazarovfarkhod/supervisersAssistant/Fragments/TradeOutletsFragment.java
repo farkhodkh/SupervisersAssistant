@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import ru.haknazarovfarkhod.supervisersAssistant.R;
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_TradeOutlets;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperTradeOutlets;
 import ru.haknazarovfarkhod.supervisersAssistant.DAO.daoHelperClasses.Order;
 
 public class TradeOutletsFragment extends Fragment implements Serializable{
@@ -32,7 +32,7 @@ public class TradeOutletsFragment extends Fragment implements Serializable{
     private long currentItemId;
     public Integer selectionMode = 0;
     private Order order;
-    DatabaseHelper_TradeOutlets sqlHelper;
+    DatabaseHelperTradeOutlets sqlHelper;
     SQLiteDatabase db;
     Cursor ordersCursor;
     SimpleCursorAdapter ordersListAdapter;
@@ -63,7 +63,7 @@ public class TradeOutletsFragment extends Fragment implements Serializable{
 
         tradeOutletsFragment = inflater.inflate(R.layout.fragment_trade_outlets, container, false);
 
-        sqlHelper = new DatabaseHelper_TradeOutlets(getContext());
+        sqlHelper = new DatabaseHelperTradeOutlets(getContext());
         productsList = tradeOutletsFragment.findViewById(R.id.tradeOutletsListView);
         productsList.setPadding(10, 10, 10, 10);
         return tradeOutletsFragment;
@@ -76,9 +76,9 @@ public class TradeOutletsFragment extends Fragment implements Serializable{
             db = sqlHelper.getReadableDatabase();
             sqlHelper.onCreate(db);
 
-            ordersCursor = db.rawQuery("select * from " + DatabaseHelper_TradeOutlets.TABLE_TRADE_OUTLETS, null);
+            ordersCursor = db.rawQuery("select * from " + DatabaseHelperTradeOutlets.TABLE_TRADE_OUTLETS, null);
 
-            String[] headers = new String[]{DatabaseHelper_TradeOutlets.TABLE_TRADE_OUTLETS_COLUMN_NAME, DatabaseHelper_TradeOutlets.TABLE_TRADE_OUTLETS_COLUMN_ADDRESS, DatabaseHelper_TradeOutlets.TABLE_TRADE_OUTLETS_COLUMN_PHONE};
+            String[] headers = new String[]{DatabaseHelperTradeOutlets.TABLE_TRADE_OUTLETS_COLUMN_NAME, DatabaseHelperTradeOutlets.TABLE_TRADE_OUTLETS_COLUMN_ADDRESS, DatabaseHelperTradeOutlets.TABLE_TRADE_OUTLETS_COLUMN_PHONE};
 
             ordersListAdapter = new SimpleCursorAdapter(getContext(), R.layout.trade_outlet_item, ordersCursor, headers, new int[]{R.id.tradeOutletNameTextView, R.id.tradeOutletAddresTextView, R.id.tradeOutletPhoneTextView}, 0);
 

@@ -21,7 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Products;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperProducts;
 import ru.haknazarovfarkhod.supervisersAssistant.DAO.daoHelperClasses.Order;
 import ru.haknazarovfarkhod.supervisersAssistant.DAO.daoHelperClasses.Product;
 import ru.haknazarovfarkhod.supervisersAssistant.R;
@@ -29,7 +29,7 @@ import ru.haknazarovfarkhod.supervisersAssistant.R;
 public class ProductsListFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private ArrayAdapter<String> listAdapter;
-    DatabaseHelper_Products sqlHelper;
+    DatabaseHelperProducts sqlHelper;
     SQLiteDatabase db;
     Long currentItemId;
     Cursor productCursor;
@@ -135,7 +135,7 @@ public class ProductsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sqlHelper = new DatabaseHelper_Products(getContext());
+        sqlHelper = new DatabaseHelperProducts(getContext());
 
         Bundle bundle = getArguments();
 
@@ -154,7 +154,7 @@ public class ProductsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         productsListFragment = inflater.inflate(R.layout.fragment_prodicts, container, false);
-        sqlHelper = new DatabaseHelper_Products(getContext());
+        sqlHelper = new DatabaseHelperProducts(getContext());
         productsList = productsListFragment.findViewById(R.id.orderListScrollView);
         productsList.setPadding(10, 10, 10, 10);
 
@@ -168,9 +168,9 @@ public class ProductsListFragment extends Fragment {
             db = sqlHelper.getReadableDatabase();
             sqlHelper.onCreate(db);
 
-            productCursor = db.rawQuery("select * from " + DatabaseHelper_Products.TABLE_PRODUCTS, null);
+            productCursor = db.rawQuery("select * from " + DatabaseHelperProducts.TABLE_PRODUCTS, null);
 
-            String[] headers = new String[]{DatabaseHelper_Products.COLUMN_PRODUCTNAME, DatabaseHelper_Products.COLUMN_ARTICLENUMBER};
+            String[] headers = new String[]{DatabaseHelperProducts.COLUMN_PRODUCTNAME, DatabaseHelperProducts.COLUMN_ARTICLENUMBER};
 
             productListAdapter = new SimpleCursorAdapter(getContext(), android.R.layout.two_line_list_item, productCursor, headers, new int[]{android.R.id.text1, android.R.id.text2}, 0);
 

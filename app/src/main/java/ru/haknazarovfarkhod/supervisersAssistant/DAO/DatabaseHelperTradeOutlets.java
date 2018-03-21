@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 import ru.haknazarovfarkhod.supervisersAssistant.MainActivity;
 
-public class DatabaseHelper_TradeOutlets extends SQLiteOpenHelper {
+public class DatabaseHelperTradeOutlets extends SQLiteOpenHelper {
     private static String DB_PATH;
     private static String DB_NAME = "supervisorsAssistant.db";
     //private static final int SCHEMA = 2;
@@ -22,7 +22,7 @@ public class DatabaseHelper_TradeOutlets extends SQLiteOpenHelper {
     public static final String TABLE_TRADE_OUTLETS_COLUMN_PHONE = "phone";
     public static final String TABLE_TRADE_OUTLETS_COLUMN_ADDRESS = "address";
 
-    public DatabaseHelper_TradeOutlets(Context context) {
+    public DatabaseHelperTradeOutlets(Context context) {
         super(context, DB_NAME, null, MainActivity.SCHEMA);
         this.myContext = context;
         DB_PATH = context.getFilesDir().getPath() + DB_NAME;

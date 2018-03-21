@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Orders;
-import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelper_Products;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperOrders;
+import ru.haknazarovfarkhod.supervisersAssistant.DAO.DatabaseHelperProducts;
 import ru.haknazarovfarkhod.supervisersAssistant.DAO.daoHelperClasses.Product;
 import ru.haknazarovfarkhod.supervisersAssistant.R;
 
@@ -22,8 +22,8 @@ public class ProductFragment extends Fragment {
     private long currentProductId = 0l;
     private Button productOKButton;
     private Button productCancelButton;
-    private DatabaseHelper_Products sqlHelper;
-    private DatabaseHelper_Orders sqlOrderHelper;
+    private DatabaseHelperProducts sqlHelper;
+    private DatabaseHelperOrders sqlOrderHelper;
     private SQLiteDatabase db;
     private EditText productName;
     private EditText productUnitOfMeasurement;
@@ -109,7 +109,7 @@ public class ProductFragment extends Fragment {
         productMinimumQuantity = productFragment.findViewById(R.id.productMinimumQuantity);
         productArticle = productFragment.findViewById(R.id.productArticle);
 
-        sqlHelper = new DatabaseHelper_Products(getContext());
+        sqlHelper = new DatabaseHelperProducts(getContext());
 
         if (currentProductId != 0) {
             db = sqlHelper.getReadableDatabase();

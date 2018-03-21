@@ -10,9 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import ru.haknazarovfarkhod.supervisersAssistant.DAO.daoHelperClasses.Product;
 import ru.haknazarovfarkhod.supervisersAssistant.MainActivity;
 
-public class DatabaseHelper_Products extends SQLiteOpenHelper {
-    private static String DB_PATH;
-    private static String DB_NAME = "supervisorsAssistant.db";
+public class DatabaseHelperProducts extends SQLiteOpenHelper {
+    private static String dbPath;
+    private static String dbName = "supervisorsAssistant.db";
     public static final String TABLE_PRODUCTS = "products";
 
     // названия столбцов products
@@ -22,18 +22,13 @@ public class DatabaseHelper_Products extends SQLiteOpenHelper {
     public static final String COLUMN_ARTICLENUMBER = "articleNumber";
     public static final String COLUMN_MINIMUMQUANTITY = "minimumQuantity";
 
-    private Context myContext;
-
-    public DatabaseHelper_Products(Context context) {
-        super(context, DB_NAME, null, MainActivity.SCHEMA);
-        this.myContext = context;
-        DB_PATH = context.getFilesDir().getPath() + DB_NAME;
+    public DatabaseHelperProducts(Context context) {
+        super(context, dbName, null, MainActivity.SCHEMA);
+        dbPath = context.getFilesDir().getPath() + dbName;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
-
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCTS + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_PRODUCTNAME + " TEXT, "
@@ -49,7 +44,7 @@ public class DatabaseHelper_Products extends SQLiteOpenHelper {
 
     public SQLiteDatabase open() throws SQLException {
 
-        return SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        return SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     public void saveProduct(SQLiteDatabase db, Product product) {
@@ -68,9 +63,6 @@ public class DatabaseHelper_Products extends SQLiteOpenHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Cursor cursor = db.rawQuery("select * from " + DatabaseHelper_Products.TABLE_PRODUCTS, null);
-        Boolean b = true;
     }
 
     public Product getProductById(SQLiteDatabase db, long currentProductId) {

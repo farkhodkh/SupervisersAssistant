@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import ru.haknazarovfarkhod.supervisersAssistant.MainActivity;
 
@@ -14,30 +15,24 @@ import ru.haknazarovfarkhod.supervisersAssistant.MainActivity;
  * Created by USER on 20.03.2018.
  */
 
-public class DatabaseHelper_Main extends SQLiteOpenHelper {
-    private static String DB_PATH;
-    private static String DB_NAME = "supervisorsAssistant.db";
-    private Context myContext;
+public class DatabaseHelperMain extends SQLiteOpenHelper {
+    private static String dbName = "supervisorsAssistant.db";
 
-
-    public DatabaseHelper_Main(Context context) {
-        super(context, DB_NAME, null, MainActivity.SCHEMA);
-        this.myContext = context;
-        DB_PATH = context.getFilesDir().getPath() + DB_NAME;
-
+    public DatabaseHelperMain(Context context) {
+        super(context, dbName, null, MainActivity.SCHEMA);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        //not used
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        //not used
     }
 
-    public HashMap getMainInformation(SQLiteDatabase db) {
+    public Map getMainInformation(SQLiteDatabase db) {
 
         HashMap totalParams = new HashMap<>();
 
@@ -45,12 +40,12 @@ public class DatabaseHelper_Main extends SQLiteOpenHelper {
                 "    sum(ordersQuantyti)\n" +
                 "    ,sum(productsQuantity)\n" +
                 "    ,sum(tradeOutletQuantity)\n" +
-                "FROM(\n" +
+                " FROM(\n" +
                 "SELECT \n" +
                 "    count(*) ordersQuantyti\n" +
                 "    ,0 productsQuantity\n" +
                 "    ,0 tradeOutletQuantity\n" +
-                "FROM " + DatabaseHelper_Orders.TABLE_ORDERS + "\n" +
+                " FROM " + DatabaseHelperOrders.TABLE_ORDERS + "\n" +
                 "\n" +
                 "UNION ALL\n" +
                 "\n" +
@@ -58,7 +53,7 @@ public class DatabaseHelper_Main extends SQLiteOpenHelper {
                 "    0\n" +
                 "    ,count(*) \n" +
                 "    ,0\n" +
-                "FROM "+ DatabaseHelper_Products.TABLE_PRODUCTS +"\n" +
+                " FROM " + DatabaseHelperProducts.TABLE_PRODUCTS + "\n" +
                 "\n" +
                 "UNION ALL\n" +
                 "\n" +
@@ -66,7 +61,7 @@ public class DatabaseHelper_Main extends SQLiteOpenHelper {
                 "    0\n" +
                 "    ,0\n" +
                 "    ,count(*) \n" +
-                "FROM " + DatabaseHelper_TradeOutlets.TABLE_TRADE_OUTLETS + "\n" +
+                "FROM " + DatabaseHelperTradeOutlets.TABLE_TRADE_OUTLETS + "\n" +
                 ") \n" +
                 ";\n";
 
